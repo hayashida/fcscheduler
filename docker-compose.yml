@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  portaldb:
+    image: mysql:5.7
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=fcdb
+      - MYSQL_USER=fc
+      - MYSQL_PASSWORD=password
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./db-data:/var/lib/mysql

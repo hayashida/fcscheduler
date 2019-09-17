@@ -1,0 +1,9 @@
+**/.DS_Store
+
+/project/project
+/project/target
+/target
+/logs
+/sbt-dist/lib
+
+/db-data

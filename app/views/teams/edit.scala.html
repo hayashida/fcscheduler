@@ -1,0 +1,11 @@
+@import forms.TeamForm
+@(form:Form[TeamForm], id: Int)
+
+@main("Edit team") {
+    @helper.form(action=routes.TeamsController.update(id)) {
+        @helper.CSRF.formField
+        @helper.inputText(form("no"))
+        @helper.inputText(form("name"))
+        <button>Save</button>
+    }
+}

@@ -1,0 +1,16 @@
+@import models.entities.TeamEntity;
+@(team: TeamEntity, id: Int)
+
+@main("Team") {
+    <table>
+        <tr>
+            <th>@team.getNo</th>
+            <th>@team.getName</th>
+        </tr>
+    </table>
+
+    @helper.form(action=routes.TeamsController.remove(id)) {
+        @helper.CSRF.formField
+        <button>Delete</button>
+    }
+}

@@ -1,0 +1,12 @@
+@import models.entities.TeamEntity
+@(teams: List[TeamEntity])
+
+@main("Teams") {
+    <h1>Teams</h1>
+
+    <ul>
+    @for(team<-teams) {
+        <li>@team</li>
+    }
+    </ul>
+}
