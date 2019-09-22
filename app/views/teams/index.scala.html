@@ -1,5 +1,5 @@
-@import models.entities.TeamEntity
-@(teams: List[TeamEntity])
+@import models.Team
+@(teams: List[Team])
 
 @layout.default("Teams") {
   <section class="content-header">
@@ -37,10 +37,10 @@
               <tbody>
                 @for(team <- teams) {
                   <tr>
-                    <th scope="row">@team.getNo()</td>
-                    <td>@team.getName()</td>
+                    <th scope="row">@team.no</td>
+                    <td>@team.name</td>
                     <td>
-                      <a href="@routes.TeamsController.show(team.getId())" class="btn btn-sm btn-info">
+                      <a href="@routes.TeamsController.show(team.id)" class="btn btn-sm btn-info">
                         <i class="fa fa-sticky-note"></i>
                       </a>
                     </td>

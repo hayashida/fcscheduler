@@ -1,14 +1,14 @@
-@import models.entities.TeamEntity;
-@(team: TeamEntity, id: Int)
+@import models.Team;
+@(team: Team, id: Int)
 
 @layout.default("Team") {
   <section class="content-header">
     <div class="row">
       <div class="col-8">
-        <h1>Team - #@team.getNo()</h1>
+        <h1>Team - #@team.no</h1>
       </div>
       <div class="col-4 text-right">
-        <a href="@routes.TeamsController.edit(team.getId())" class="btn btn-sm btn-link">
+        <a href="@routes.TeamsController.edit(team.id)" class="btn btn-sm btn-link">
           <i class="fa fa-pen"></i>
           Edit
         </a>
@@ -29,7 +29,7 @@
           <div class="card-body">
             <div class="form-group row">
               <label for="team__name" class="col-sm-2 col-form-label">Name</label>
-              <div class="col-sm-10 form-control-plaintext">@team.getName()</div>
+              <div class="col-sm-10 form-control-plaintext">@team.name</div>
             </div>
           </div>
       </div>

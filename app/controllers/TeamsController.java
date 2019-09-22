@@ -4,11 +4,11 @@ import forms.TeamForm;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import javax.inject.Inject;
-import models.entities.TeamEntity;
-import models.repositories.TeamRepository;
+import models.Team;
 import play.data.*;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.*;
+import repositories.TeamRepository;
 
 public class TeamsController extends Controller {
 
@@ -41,12 +41,12 @@ public class TeamsController extends Controller {
   }
 
   public CompletionStage<Result> create() {
-    Form form = formFactory.form(TeamEntity.class).bindFromRequest();
+    Form form = formFactory.form(Team.class).bindFromRequest();
 
     try {
-      TeamEntity teamEntity = (TeamEntity) form.get();
+      Team team = (Team) form.get();
       return teamRepository
-          .add(teamEntity)
+          .add(team)
           .thenApplyAsync(
               p -> {
                 return redirect(routes.TeamsController.index());
@@ -73,8 +73,9 @@ public class TeamsController extends Controller {
         .thenApplyAsync(
             team -> {
               TeamForm form = new TeamForm(id);
-              form.setNo(team.getNo());
-              form.setName(team.getName());
+              form.setNo(team.no);
+              form.setName(team.name);
+
               Form<TeamForm> formdata = teamForm.fill(form);
               return ok(views.html.teams.edit.render(formdata, id));
             },
@@ -82,11 +83,11 @@ public class TeamsController extends Controller {
   }
 
   public CompletionStage<Result> update(int id) {
-    Form form = formFactory.form(TeamEntity.class).bindFromRequest();
+    Form form = formFactory.form(Team.class).bindFromRequest();
 
     try {
-      TeamEntity team = (TeamEntity) form.get();
-      team.setId(id);
+      Team team = (Team) form.get();
+      team.id = id;
 
       return teamRepository
           .update(team)

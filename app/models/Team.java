@@ -1,4 +1,4 @@
-package models.entities;
+package models;
 
 import javax.persistence.*;
 import lombok.Data;
@@ -7,20 +7,20 @@ import play.data.validation.Constraints.*;
 @Entity
 @Data
 @Table(name = "teams")
-public class TeamEntity {
+public class Team extends AppModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  public Integer id;
 
-  @Required private Integer no;
+  @Required public Integer no;
 
-  @Required private String name;
+  @Required public String name;
 
-  public TeamEntity() {
+  public Team() {
     super();
   }
 
-  public TeamEntity(int id, int no, String name) {
+  public Team(int id, int no, String name) {
     super();
 
     this.id = id;
