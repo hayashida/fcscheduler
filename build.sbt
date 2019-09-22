@@ -19,3 +19,11 @@ libraryDependencies ++= Seq(
 
 // lombok
 libraryDependencies += "org.projectlombok" % "lombok" % "1.18.10"
+
+// webjar
+libraryDependencies ++= Seq(
+  "org.webjars" % "jquery" % "3.4.1",
+  "org.webjars" % "jquery-ui" % "1.12.1",
+  "org.webjars" % "bootstrap" % "4.3.1",
+  "org.webjars" % "font-awesome" % "5.10.1",
+)

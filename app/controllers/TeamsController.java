@@ -82,15 +82,22 @@ public class TeamsController extends Controller {
   }
 
   public CompletionStage<Result> update(int id) {
-    TeamForm form = formFactory.form(TeamForm.class).bindFromRequest().get();
-    TeamEntity team = new TeamEntity(id, form.getNo(), form.getName());
-    return teamRepository
-        .update(team)
-        .thenApplyAsync(
-            p -> {
-              return redirect(routes.TeamsController.index());
-            },
-            ec.current());
+    Form form = formFactory.form(TeamEntity.class).bindFromRequest();
+
+    try {
+      TeamEntity team = (TeamEntity) form.get();
+      team.setId(id);
+
+      return teamRepository
+          .update(team)
+          .thenApplyAsync(
+              p -> {
+                return redirect(routes.TeamsController.index());
+              },
+              ec.current());
+    } catch (IllegalStateException e) {
+      return CompletableFuture.completedFuture(ok(views.html.teams.edit.render(form, id)));
+    }
   }
 
   public CompletionStage<Result> remove(int id) {

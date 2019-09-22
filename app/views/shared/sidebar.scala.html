@@ -1,0 +1,37 @@
+<div class="sidebar">
+  <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false" role="menu">
+      <li class="nav-item">
+        <a href="@routes.HomeController.index()" class="nav-link">
+          <i class="nav-icon fa fa-columns"></i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-layer-group"></i>
+          <p>
+            Teams
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="@routes.TeamsController.index()" class="nav-link">
+              <i class="nav-icon fa fa-list"></i>
+              <p>list</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="@routes.TeamsController.add()" class="nav-link">
+              <i class="nav-icon fa fa-edit"></i>
+              <p>add</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

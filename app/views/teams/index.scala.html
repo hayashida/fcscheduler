@@ -1,12 +1,55 @@
 @import models.entities.TeamEntity
 @(teams: List[TeamEntity])
 
-@main("Teams") {
-    <h1>Teams</h1>
+@layout.default("Teams") {
+  <section class="content-header">
+    <div class="row">
+      <div class="col-8">
+        <h1>Teams</h1>
+      </div>
+      <div class="col-4 text-right">
+        <a href="@routes.TeamsController.add()" class="btn btn-secondary">
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <ul>
-    @for(team<-teams) {
-        <li>@team</li>
-    }
-    </ul>
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-striped">
+              <colgroup>
+                <col width="10%">
+                <col>
+                <col width="10%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(team <- teams) {
+                  <tr>
+                    <th scope="row">@team.getNo()</td>
+                    <td>@team.getName()</td>
+                    <td>
+                      <a href="@routes.TeamsController.show(team.getId())" class="btn btn-sm btn-info">
+                        <i class="fa fa-sticky-note"></i>
+                      </a>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 }

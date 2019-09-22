@@ -1,11 +1,35 @@
 @import forms.TeamForm
-@(form:Form[TeamForm], id: Int)
+@import models.entities.TeamEntity;
+@(form: Form[TeamForm], id: Int)
+@implicitField = @{ helper.FieldConstructor(shared.form.inputTextTemplate.f) }
 
-@main("Edit team") {
-    @helper.form(action=routes.TeamsController.update(id)) {
-        @helper.CSRF.formField
-        @helper.inputText(form("no"))
-        @helper.inputText(form("name"))
-        <button>Save</button>
-    }
+@layout.default("Edit team") {
+  <section class="content-header">
+    <div class="row">
+      <div class="col-12">
+        <h1>Edit team</h1>
+      </div>
+    </div>
+  </section>
+
+  <div class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          @helper.form(action=routes.TeamsController.update(id)) {
+            @helper.CSRF.formField
+
+            <div class="card-body">
+              @helper.inputText(form("no"))
+              @helper.inputText(form("name"))
+            </div>
+
+            <div class="card-footer text-right">
+              <button class="btn btn-primary">Save</button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 }

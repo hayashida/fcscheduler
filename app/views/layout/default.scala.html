@@ -1,0 +1,30 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  @shared.head(title)
+</head>
+
+<body class="skin-blue sidebar-mini">
+  <div class="wrapper">
+    @shared.header()
+
+    <aside class="main-sidebar sidebar-dark-secondary elevation-4">
+      <a href="@routes.HomeController.index()" class="brand-link d-flex">
+        <span class="logo">
+          <img src="@routes.Assets.versioned("images/logo.jpg")">
+        </span>
+      </a>
+      @shared.sidebar()
+    </aside>
+
+    <div class="content-wrapper">
+      @content
+    </div>
+
+    @shared.footer()
+  </div>
+</body>
+
+</html>

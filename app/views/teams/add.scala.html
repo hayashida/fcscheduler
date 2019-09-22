@@ -1,11 +1,34 @@
 @import forms.TeamForm
-@(form:Form[TeamForm])
+@(form: Form[TeamForm])
+@implicitField = @{ helper.FieldConstructor(shared.form.inputTextTemplate.f) }
 
-@main("Create team") {
-    @helper.form(action=routes.TeamsController.create()) {
-        @helper.CSRF.formField
-        @helper.inputText(form("no"))
-        @helper.inputText(form("name"))
-        <button>Add</button>
-    }
+@layout.default("Add team") {
+  <section class="content-header">
+    <div class="row">
+      <div class="col-12">
+        <h1>Add team</h1>
+      </div>
+    </div>
+  </section>
+
+  <div class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          @helper.form(action=routes.TeamsController.create()) {
+            @helper.CSRF.formField
+
+            <div class="card-body">
+              @helper.inputText(form("no"))
+              @helper.inputText(form("name"))
+            </div>
+
+            <div class="card-footer text-right">
+              <button class="btn btn-primary">Save</button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 }

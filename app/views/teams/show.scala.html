@@ -1,20 +1,37 @@
 @import models.entities.TeamEntity;
 @(team: TeamEntity, id: Int)
 
-@main("Team") {
-    <table>
-        <tr>
-            <th>No</th>
-            <td>@team.getNo()</td>
-        </tr>
-        <<tr>
-            <th>Name</th>
-            <td>@team.getName()</td>
-        </tr>
-    </table>
+@layout.default("Team") {
+  <section class="content-header">
+    <div class="row">
+      <div class="col-8">
+        <h1>Team - #@team.getNo()</h1>
+      </div>
+      <div class="col-4 text-right">
+        <a href="@routes.TeamsController.edit(team.getId())" class="btn btn-secondary">
+          <i class="fa fa-pen"></i>
+        </a>
+        @helper.form(action=routes.TeamsController.remove(id), 'class -> "form-row-header") {
+          @helper.CSRF.formField
+          <button class="btn btn-danger">
+            <i class="fa fa-trash-alt"></i>
+          </button>
+        }
+      </div>
+    </div>
+  </section>
 
-    @helper.form(action=routes.TeamsController.remove(id)) {
-        @helper.CSRF.formField
-        <button>Delete</button>
-    }
+  <section class="content">
+    <div class="col-12">
+      <div class="card card-secondary">
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="team__name" class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10 form-control-plaintext">@team.getName()</div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </section>
 }
