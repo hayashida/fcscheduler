@@ -8,13 +8,15 @@
         <h1>Team - #@team.getNo()</h1>
       </div>
       <div class="col-4 text-right">
-        <a href="@routes.TeamsController.edit(team.getId())" class="btn btn-secondary">
+        <a href="@routes.TeamsController.edit(team.getId())" class="btn btn-sm btn-link">
           <i class="fa fa-pen"></i>
+          Edit
         </a>
         @helper.form(action=routes.TeamsController.remove(id), 'class -> "form-row-header") {
           @helper.CSRF.formField
-          <button class="btn btn-danger">
+          <button class="btn btn-sm btn-link" data-widget="delete">
             <i class="fa fa-trash-alt"></i>
+            Delete
           </button>
         }
       </div>

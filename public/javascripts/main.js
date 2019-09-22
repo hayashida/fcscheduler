@@ -1,6 +1,6 @@
 (function($) {
   $(document).ready(function() {
-    $('.btn-danger').on('click', function() {
+    $('[data-widget="delete"]').on('click', function() {
       if (confirm('Are you sure?') === false) {
         return false;
       }
