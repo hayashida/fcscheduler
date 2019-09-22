@@ -8,9 +8,6 @@ import play.data.validation.Constraints.*;
 @Data
 @Table(name = "teams")
 public class Team extends AppModel {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Integer id;
 
   @Required public Integer no;
 
