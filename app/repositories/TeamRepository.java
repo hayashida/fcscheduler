@@ -29,7 +29,7 @@ public class TeamRepository {
   }
 
   private List<Team> list(EntityManager em) {
-    return em.createQuery("select p from Team p", Team.class).getResultList();
+    return em.createQuery("select p from Team p order by p.no asc", Team.class).getResultList();
   }
 
   public CompletionStage<Team> get(int id) {
