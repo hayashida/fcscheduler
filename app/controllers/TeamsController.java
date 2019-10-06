@@ -8,26 +8,24 @@ import models.Team;
 import play.data.*;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.*;
-import repositories.TeamRepository;
+import services.TeamService;
 
-public class TeamsController extends Controller {
-
+public class TeamsController extends ApplicationController {
   private final Form<TeamForm> teamForm;
   private final FormFactory formFactory;
-  private final TeamRepository teamRepository;
+  private final TeamService service;
   private final HttpExecutionContext ec;
 
   @Inject
-  public TeamsController(
-      FormFactory formFactory, TeamRepository teamRepository, HttpExecutionContext ec) {
+  public TeamsController(FormFactory formFactory, TeamService service, HttpExecutionContext ec) {
     this.formFactory = formFactory;
     this.teamForm = formFactory.form(TeamForm.class);
-    this.teamRepository = teamRepository;
+    this.service = service;
     this.ec = ec;
   }
 
   public CompletionStage<Result> index() {
-    return teamRepository
+    return service
         .list()
         .thenApplyAsync(
             teams -> {
@@ -45,7 +43,7 @@ public class TeamsController extends Controller {
 
     try {
       Team team = (Team) form.get();
-      return teamRepository
+      return service
           .add(team)
           .thenApplyAsync(
               p -> {
@@ -58,7 +56,7 @@ public class TeamsController extends Controller {
   }
 
   public CompletionStage<Result> show(int id) {
-    return teamRepository
+    return service
         .get(id)
         .thenApplyAsync(
             team -> {
@@ -68,7 +66,7 @@ public class TeamsController extends Controller {
   }
 
   public CompletionStage<Result> edit(int id) {
-    return teamRepository
+    return service
         .get(id)
         .thenApplyAsync(
             team -> {
@@ -89,7 +87,7 @@ public class TeamsController extends Controller {
       Team team = (Team) form.get();
       team.id = id;
 
-      return teamRepository
+      return service
           .update(team)
           .thenApplyAsync(
               p -> {
@@ -102,7 +100,7 @@ public class TeamsController extends Controller {
   }
 
   public CompletionStage<Result> remove(int id) {
-    return teamRepository
+    return service
         .delete(id)
         .thenApplyAsync(
             p -> {

@@ -1,4 +1,4 @@
-package repositories;
+package services;
 
 import akka.actor.ActorSystem;
 import javax.inject.Inject;

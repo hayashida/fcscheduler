@@ -8,25 +8,24 @@ import models.Place;
 import play.data.*;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.*;
-import repositories.PlaceRepository;
+import services.PlaceService;
 
 public class PlacesController extends ApplicationController {
   private final Form<PlaceForm> placeForm;
   private final FormFactory formFactory;
-  private final PlaceRepository placeRepository;
+  private final PlaceService service;
   private final HttpExecutionContext ec;
 
   @Inject
-  public PlacesController(
-      FormFactory formFactory, PlaceRepository placeRepository, HttpExecutionContext ec) {
+  public PlacesController(FormFactory formFactory, PlaceService service, HttpExecutionContext ec) {
     this.formFactory = formFactory;
     this.placeForm = formFactory.form(PlaceForm.class);
-    this.placeRepository = placeRepository;
+    this.service = service;
     this.ec = ec;
   }
 
   public CompletionStage<Result> index() {
-    return placeRepository
+    return service
         .list()
         .thenApplyAsync(
             places -> {
@@ -44,7 +43,7 @@ public class PlacesController extends ApplicationController {
 
     try {
       Place place = (Place) form.get();
-      return placeRepository
+      return service
           .add(place)
           .thenApplyAsync(
               p -> {
@@ -57,7 +56,7 @@ public class PlacesController extends ApplicationController {
   }
 
   public CompletionStage<Result> show(int id) {
-    return placeRepository
+    return service
         .get(id)
         .thenApplyAsync(
             place -> {
@@ -67,7 +66,7 @@ public class PlacesController extends ApplicationController {
   }
 
   public CompletionStage<Result> edit(int id) {
-    return placeRepository
+    return service
         .get(id)
         .thenApplyAsync(
             place -> {
@@ -89,7 +88,7 @@ public class PlacesController extends ApplicationController {
       Place place = (Place) form.get();
       place.id = id;
 
-      return placeRepository
+      return service
           .update(place)
           .thenApplyAsync(
               p -> {
@@ -102,7 +101,7 @@ public class PlacesController extends ApplicationController {
   }
 
   public CompletionStage<Result> remove(int id) {
-    return placeRepository
+    return service
         .delete(id)
         .thenApplyAsync(
             p -> {
