@@ -21,7 +21,7 @@ public class TeamRepository extends AppRepository {
   }
 
   private List<Team> list(EntityManager em) {
-    return em.createQuery("select p from Team p order by p.no asc", Team.class).getResultList();
+    return em.createNamedQuery("Team.findAll", Team.class).getResultList();
   }
 
   public CompletionStage<Team> get(int id) {
@@ -29,7 +29,9 @@ public class TeamRepository extends AppRepository {
   }
 
   private Team get(EntityManager em, int id) {
-    return em.find(Team.class, id);
+    return em.createNamedQuery("Team.findById", Team.class)
+        .setParameter("id", id)
+        .getSingleResult();
   }
 
   public CompletionStage<Team> add(Team team) {

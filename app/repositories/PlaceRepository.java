@@ -21,9 +21,7 @@ public class PlaceRepository extends AppRepository {
   }
 
   private List<Place> list(EntityManager em) {
-    // return em.createQuery("select p from Place p order by p.no asc",
-    // Place.class).getResultList();
-    return em.createNamedQuery("findAll", Place.class).getResultList();
+    return em.createNamedQuery("Place.findAll", Place.class).getResultList();
   }
 
   public CompletionStage<Place> get(int id) {
@@ -31,8 +29,9 @@ public class PlaceRepository extends AppRepository {
   }
 
   private Place get(EntityManager em, int id) {
-    // return em.find(Place.class, id);
-    return em.createNamedQuery("findById", Place.class).setParameter("id", id).getSingleResult();
+    return em.createNamedQuery("Place.findById", Place.class)
+        .setParameter("id", id)
+        .getSingleResult();
   }
 
   public CompletionStage<Place> add(Place place) {
