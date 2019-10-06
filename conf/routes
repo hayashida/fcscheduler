@@ -19,6 +19,11 @@ POST    /teams/:id/remove           controllers.TeamsController.remove(id: Int)
 
 GET     /places                     controllers.PlacesController.index
 GET     /places/add                 controllers.PlacesController.add
+POST    /places/create              controllers.PlacesController.create
+GET     /places/:id                 controllers.PlacesController.show(id: Int)
+GET     /places/:id/edit            controllers.PlacesController.edit(id: Int)
+POST    /places/:id/update          controllers.PlacesController.update(id: Int)
+POST    /places/:id/remove          controllers.PlacesController.remove(id: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
