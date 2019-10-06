@@ -1,0 +1,35 @@
+@import forms.PlaceForm
+@(form: Form[PlaceForm])
+@implicitField = @{ helper.FieldConstructor(shared.form.inputTextTemplate.f) }
+
+@layout.default("Add place") {
+  <section class="content-header">
+    <div class="row">
+      <div class="col-12">
+        <h1>Add place</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          @helper.form(action=routes.PlacesController.create()) {
+            @helper.CSRF.formField
+
+            <div class="card-body">
+              @helper.inputText(form("no"))
+              @helper.inputText(form("name"))
+              @helper.inputText(form("latlng"))
+            </div>
+
+            <div class="card-footer text-right">
+              <button class="btn btn-sm btn-primary">Save</button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}

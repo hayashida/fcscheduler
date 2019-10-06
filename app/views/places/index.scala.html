@@ -1,0 +1,56 @@
+@import models.Place
+@(places: List[Place])
+
+@layout.default("Places") {
+  <section class="content-header">
+    <div class="row">
+      <div class="col-8">
+        <h1>Places</h1>
+      </div>
+      <div class="col-4 text-right">
+        <a href="@routes.PlacesController.add()" class="btn btn-sm btn-link">
+          <i class="fa fa-plus"></i>
+          Add
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-striped">
+              <colgroup>
+                <col width="10%">
+                <col>
+                <col width="10%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(place <- places) {
+                  <tr>
+                    <th scope="row">@place.no</th>
+                    <td>@place.name</td>
+                    <td>
+                      <a href="@routes.PlacesController.show(place.id)" class="btn btn-sm btn-info">
+                        <i class="fa fa-sticky-note"></i>
+                      </a>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+}
