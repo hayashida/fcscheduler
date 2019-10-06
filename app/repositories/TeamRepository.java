@@ -4,24 +4,16 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 import java.util.List;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Function;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import models.Team;
 import play.db.jpa.JPAApi;
 
-public class TeamRepository {
-  private JPAApi jpaApi;
-  private DatabaseExecutionContext executionContext;
-
+public class TeamRepository extends AppRepository {
   @Inject
   public TeamRepository(JPAApi jpaApi, DatabaseExecutionContext executionContext) {
     this.jpaApi = jpaApi;
     this.executionContext = executionContext;
-  }
-
-  private <T> T withTransaction(Function<EntityManager, T> function) {
-    return jpaApi.withTransaction(function);
   }
 
   public CompletionStage<List<Team>> list() {
